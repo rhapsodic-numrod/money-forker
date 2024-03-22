@@ -1,4 +1,4 @@
-package com.numrod.moneyforker.ui.screens
+package com.numrod.moneyforker.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,10 +12,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,16 +30,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.numrod.moneyforker.ui.theme.MoneyForkerTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
 
     Scaffold(
         modifier = Modifier.padding(20.dp),
         topBar = {
             Greeting(name = "Profiliu")
-        }
+        },
+
     ) {
 
 
@@ -56,7 +64,7 @@ fun HomeScreen() {
 
 @Composable
 fun ActivitySection() {
-    Column {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -143,6 +151,6 @@ fun AccountingCard(balance: Double, isExpense: Boolean) {
 @Composable
 fun HomeScreenPreview() {
     MoneyForkerTheme {
-        HomeScreen()
+        HomeScreen(navController = rememberNavController())
     }
 }

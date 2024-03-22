@@ -1,4 +1,4 @@
-package com.numrod.moneyforker.ui.screens
+package com.numrod.moneyforker.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,17 +31,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.numrod.moneyforker.ui.theme.MoneyForkerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(navController: NavController) {
     var isDarkMode by rememberSaveable { mutableStateOf(false) }
     Scaffold(
         modifier = Modifier.padding(20.dp),
         topBar = {
-            TopAppBar(title = { Text(text = "Settings") }, navigationIcon = {
-                IconButton(onClick = { /*TODO: Go back to more page*/ }) {
+            CenterAlignedTopAppBar(title = { Text(text = "Settings") }, navigationIcon = {
+                IconButton(onClick = { navController.navigateUp() }) {
                     Icon(Icons.Filled.ArrowBack, contentDescription = "")
                 }
             })
@@ -69,6 +72,6 @@ fun SettingsScreen() {
 @Composable
 fun SettingsScreenPreview() {
     MoneyForkerTheme {
-        SettingsScreen()
+        SettingsScreen(navController = rememberNavController())
     }
 }

@@ -1,4 +1,4 @@
-package com.numrod.moneyforker.ui.screens
+package com.numrod.moneyforker.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -24,21 +25,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.numrod.moneyforker.NavItem
 import com.numrod.moneyforker.ui.theme.MoneyForkerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoreScreen(){
+fun MoreScreen(navController: NavController){
     Scaffold(
         modifier = Modifier.padding(20.dp),
         topBar = {
-            TopAppBar(title = { Text(text = "More") })
+            CenterAlignedTopAppBar(title = { Text(text = "More") })
         },
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)){
 
 
-            OptionCard("Settings", Icons.Filled.Settings) { /*TODO: Go to settings page*/ }
+            OptionCard("Settings", Icons.Filled.Settings) {
+                navController.navigate(NavItem.Settings.route)
+            }
             OptionCard("Help", Icons.Filled.Info) { /*TODO: Go to help page*/ }
         }
     }
@@ -65,6 +71,6 @@ private fun OptionCard(name: String, icon: ImageVector, onClick: () -> Unit) {
 @Composable
 fun MoreScreenPreview(){
     MoneyForkerTheme {
-        MoreScreen()
+        MoreScreen(navController = rememberNavController())
     }
 }
